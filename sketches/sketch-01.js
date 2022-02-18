@@ -1,7 +1,7 @@
 const canvasSketch = require("canvas-sketch");
 
 const settings = {
-  dimensions: [1080, 1080],
+  dimensions: [1920 * 2, 1920 * 2],
 };
 
 const sketch = () => {
@@ -9,7 +9,7 @@ const sketch = () => {
     context.fillStyle = "white";
     // TASK (linha 33)
     // Invert the colors of the sketch. Use black for the background and white for the outlines.
-    // context.fillStyle = "black";
+    context.fillStyle = "black";
     context.fillRect(0, 0, width, height);
     context.lineWidth = width * 0.005;
 
@@ -18,7 +18,6 @@ const sketch = () => {
     let gap = width * 0.03;
     const ix = width * 0.17;
     const iy = height * 0.17;
-
     const off = width * 0.02;
 
     let x, y;
@@ -30,7 +29,7 @@ const sketch = () => {
 
         context.beginPath();
         context.rect(x, y, w, h);
-        // context.strokeStyle = "white";
+        context.strokeStyle = "white";
         context.stroke();
 
         if (Math.random() > 0.5) {
