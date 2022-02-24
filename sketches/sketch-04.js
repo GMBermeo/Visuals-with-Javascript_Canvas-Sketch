@@ -17,8 +17,9 @@ const params = {
   freq: 0.001,
   amp: 0.5,
   frame: 0,
+  speed: 10,
   animate: true,
-  lineCap: "butt",
+  lineCap: "round",
 };
 
 const sketch = () => {
@@ -48,7 +49,7 @@ const sketch = () => {
 
       const f = params.animate ? frame : params.frame;
       // const n = noise2D(x + frame * 10, y, params.freq);
-      const n = noise3D(x, y, f * 10, params.freq);
+      const n = noise3D(x, y, f * params.speed, params.freq);
 
       const angle = n * Math.PI * params.amp;
       const scale = math.mapRange(n, -1, 1, params.scaleMin, params.scaleMax);
@@ -88,6 +89,7 @@ const createPane = () => {
   folder.addInput(params, "freq", { min: -0.01, max: 0.01 });
   folder.addInput(params, "amp", { min: 0, max: 0.5 });
   folder.addInput(params, "frame", { min: 1, max: 999 });
+  folder.addInput(params, "speed", { min: 10, max: 100 });
   folder.addInput(params, "animate");
 };
 createPane();
