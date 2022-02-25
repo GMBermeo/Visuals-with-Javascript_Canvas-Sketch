@@ -2,11 +2,11 @@ const canvasSketch = require("canvas-sketch");
 const random = require("canvas-sketch-util/random");
 
 const settings = {
-  dimensions: [2048 / 2, 2048 / 2],
+  dimensions: [2048, 2048],
 };
 let manager;
 
-let text = "gm";
+let text = "DTI";
 let fontSize = 1200;
 let fontFamily = "serif";
 
@@ -26,7 +26,7 @@ const sketch = ({ context, width, height }) => {
     typeContext.fillStyle = "black";
     typeContext.fillRect(0, 0, width, height);
 
-    fontSize = cols * 1.2;
+    fontSize = cols * 0.5;
 
     typeContext.fillStyle = "white";
     typeContext.font = `${fontSize}px ${fontFamily}`;
@@ -53,8 +53,13 @@ const sketch = ({ context, width, height }) => {
 
     const typeData = typeContext.getImageData(0, 0, cols, rows).data;
 
-    // Fundo preto
-    context.fillStyle = "black";
+    //Gradiente azul
+    var grd = context.createLinearGradient(0, 90, width, height);
+    grd.addColorStop(0, "#0d47a1");
+    grd.addColorStop(1, "#0e4ead");
+
+    // Fundo
+    context.fillStyle = grd;
     context.fillRect(0, 0, width, height);
 
     context.textBaseline = "middle";
@@ -76,10 +81,10 @@ const sketch = ({ context, width, height }) => {
 
       const glyph = getGlyph(r);
 
-      context.font = `${cell * 2}px ${fontFamily}`;
+      context.font = `${cell * (3 * Math.random())}px ${fontFamily}`;
 
       if (Math.random() < 0.1) {
-        context.font = `${cell * 6}px ${fontFamily}`;
+        context.font = `${cell * 5}px ${fontFamily}`;
       }
 
       // context.fillStyle = `rgb(${r},${g},${b},${a})`;
@@ -103,11 +108,21 @@ const sketch = ({ context, width, height }) => {
 };
 const getGlyph = (v) => {
   if (v < 50) return "";
-  if (v < 100) return ".";
-  if (v < 150) return "-";
-  if (v < 200) return "+";
+  // if (v < 100) return ".";
+  // if (v < 150) return "-";
+  // if (v < 200) return "+";
+  if (v > 230 && v < 245) {
+    if (Math.random() < 0.1) {
+      return "caranguejo";
+    }
+  }
+  if (v > 240 && v < 250)
+    if (Math.random() < 0.1) {
+      return "curitibano";
+    }
+  // if (v < 255) return "points";
 
-  const glyphs = "_= /".split("");
+  const glyphs = "_=/|˜.DTIdt i".split("");
 
   return random.pick(glyphs);
 };
