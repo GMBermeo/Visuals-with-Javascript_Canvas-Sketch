@@ -70,7 +70,7 @@ const sketch = () => {
         slice * random.range(1, 20)
       );
       context.shadowBlur = 100;
-      context.shadowColor = "#00000022";
+      context.shadowColor = "#00000011";
       context.strokeStyle = "white";
 
       context.stroke();

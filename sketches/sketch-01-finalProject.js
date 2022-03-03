@@ -1,25 +1,29 @@
 const canvasSketch = require("canvas-sketch");
 const random = require("canvas-sketch-util/random");
+import { gerarCorAleatoria, gerarCorMaterial } from "../CoresUtil.js";
 
 const settings = {
-  dimensions: [1920 * 2, 1920 * 2],
+  dimensions: [1920 * 8, 1920 * 8],
 };
 
 const matrix = Math.floor(random.range(3, 10));
-// const matrix = 10;
+
 console.log(matrix);
-const gap = matrix * Math.floor(random.range(25, 50));
-// const gap = 0;
 
 const cols = matrix;
 const rows = matrix;
 
 const sketch = () => {
   return ({ context, width, height }) => {
-    context.fillStyle = "white";
+    const eightPercent = width * 0.008;
+    const thirtyPercent = width * 0.03;
+
+    const gap =
+      matrix * Math.floor(random.range(eightPercent / 2, eightPercent));
+    context.fillStyle = "#FFF";
     // TASK (linha 33)
     // Invert the colors of the sketch. Use black for the background and white for the outlines.
-    context.fillStyle = "black";
+    // context.fillStyle = "black";
     context.fillRect(0, 0, width, height);
     // context.lineWidth = width * 0.005;
 
@@ -27,7 +31,7 @@ const sketch = () => {
 
     const marginx = width * 0.05;
     const marginy = height * 0.05;
-    // const off = width * 0.02;
+    const off = width * 0.02;
     let w = (width * 0.9) / cols - (gap * (cols - 1)) / cols;
     console.log(w);
     let h = (height * 0.9) / rows - (gap * (rows - 1)) / rows;
@@ -40,27 +44,52 @@ const sketch = () => {
         console.log(marginx, marginy, gap, w);
         console.log("X, Y : " + x, y);
 
-        context.save();
-        context.fillStyle = "red";
-        context.fillRect(marginx, marginy, w, h);
+        // context.save();
         context.beginPath();
         context.rect(x, y, w, h);
-        // context.strokeStyle = "black";
-        context.fillStyle = "white";
-        context.fill();
-        context.restore();
-        // context.stroke();
-        // context.shadowBlur = 200;
-        // context.shadowColor = "#00000022";
-
-        // if (Math.random() > 0.5) {
+        if (Math.random() >= 0.5) {
+          context.shadowOffsetX = -gap / 10;
+          context.shadowOffsetY = -gap / 10;
+          context.shadowColor = "white";
+          context.shadowBlur = thirtyPercent;
+          // context.shadowColor = "#0000001a";
+          context.fill();
+          context.shadowOffsetX = gap / 10;
+          context.shadowOffsetY = gap / 10;
+          context.shadowColor = "#00000011";
+          context.shadowBlur = thirtyPercent;
+          context.fillStyle = "white";
+          context.fill();
+        } else {
+          // context.shadowColor = "#00000011";
+          // context.shadowBlur = thirtyPercent / 3;
+          context.lineWidth = thirtyPercent / 3;
+          context.strokeStyle = "white";
+          context.stroke();
+        }
+        // if (Math.random() > 0.2) {
         //   context.beginPath();
-        //   context.rect(x + off / 2, y + off / 2, w - off, h - off);
-        //   // context.strokeStyle = "red";
+        //   context.rect(
+        //     x + w / 4,
+        //     y + h / 4,
+        //     w / Math.floor(random.range(2, 8)),
+        //     h / Math.floor(random.range(2, 8))
+        //   );
+        //   let corNeon = gerarCorMaterial("A400");
+        //   context.shadowColor = corNeon;
+        //   context.shadowBlur = 10;
+        //   // context.shadowColor = "#0000001a";
+        //   context.fillStyle = corNeon;
+
+        //   // context.lineWidth = 50;
+        //   // context.strokeStyle = corNeon;
+        //   // context.stroke();
         //   context.fill();
-        //   context.stroke();
         // }
+        // context.restore();
       }
+
+      // context.stroke();
     }
   };
 };
