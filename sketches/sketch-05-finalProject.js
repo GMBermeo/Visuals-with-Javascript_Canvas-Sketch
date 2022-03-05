@@ -2,12 +2,13 @@ const canvasSketch = require("canvas-sketch");
 const random = require("canvas-sketch-util/random");
 
 const settings = {
-  dimensions: [1080 * 8, 1080 * 8],
+  dimensions: [1080 * 5, 1080 * 5],
 };
 
 let manager, image;
 
-let fontSize = 100;
+let emptySpaces = 0.5;
+let fontSize = 3;
 let fontFamily = "monospace";
 
 const typeCanvas = document.createElement("canvas");
@@ -50,15 +51,53 @@ const sketch = ({ context, width, height }) => {
       const b = typeData[i * 4 + 2];
       const a = typeData[i * 4 + 3];
 
-      const value = r + g + b / 255;
+      const value = (r + g + b) / 3;
 
       const glyph = getGlyph(r);
 
-      context.font = `${
-        (cell * fontSize) / random.range(2, 8)
-      }px ${fontFamily}`;
-      if (Math.random() < 0.1)
-        context.font = `${cell * fontSize}px ${fontFamily}`;
+      // console.log("Teste Math.random(): " + Math.random());
+      let randomChances = Math.random();
+      let calculatedFontSize = cell * fontSize * (cols / 10);
+
+      if (randomChances < 0.01) {
+        context.font = `${
+          calculatedFontSize * random.range(3, 7)
+        }px ${fontFamily}`;
+        console.log("🟩 if 0.01");
+        // console.log(
+        //   "🟩 if 0.01 grande " +
+        //     Math.floor(cell * fontSize * random.range(5, 8))
+        // );
+      } else if (randomChances < 0.1) {
+        context.font = `${
+          calculatedFontSize * random.range(1, 2)
+        }px ${fontFamily}`;
+        console.log("🟨 if 0.1");
+        // console.log(
+        //   "🟨 if 0.5 menor " + Math.floor(cell * fontSize * random.range(1, 2))
+        // );
+      } else {
+        context.font = `${
+          calculatedFontSize / random.range(1, 8)
+        }px ${fontFamily}`;
+        console.log("🟥 else");
+        // console.log(
+        //   "🟥 else " + Math.floor((cell * fontSize) / random.range(1, 8))
+        // );
+      }
+
+      //   (cell * fontSize) / random.range(0.5, 8)
+      // }px ${fontFamily}`;
+      // if (Math.random() < 0.00001)
+      //   context.font = `${
+      //     cell * fontSize * random.range(5, 10)
+      //   }px ${fontFamily}`;
+      // console.log("if 0.00001 grande" + cell * fontSize * random.range(5, 10));
+      // if (Math.random() < 0.01)
+      //   context.font = `${
+      //     cell * fontSize * random.range(1, 2)
+      //   }px ${fontFamily}`;
+      // console.log("if 0.01 menor " + cell * fontSize * random.range(1, 2));
 
       context.fillStyle = `rgba(${r}, ${g}, ${b}, ${value / 255})`;
 
@@ -79,18 +118,23 @@ const sketch = ({ context, width, height }) => {
 
 const getGlyph = (v) => {
   const symbols = ".|-_=~:;,`^#-|_-".split("");
-  const glyphs =
-    "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン".split(
+  const katakanas =
+    "アイウエオカカカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン".split(
       ""
     );
-  // if (v < 150) return "|";
-  // if (v < 200) return "-";
-  if (Math.random() >= 0.2) return "";
-  if (v < 255) return "-";
+  const kanjis =
+    "⼀⼁⼂⼃⼄⺃⼅⼆⼇⼈⺅𠆢⼉⼊⼋⼌⼍⼎⼏⺇⼐⼑⺉⼒⼓⼔⼕⼖⼗⼘⼙⼚⼛⼜⼠⼡⼢⼣⼤⼥⼦⼧⼨⼩⺌⺐⼫⼬⼭⼮川⼯⼰⼱⼲⺓⼴⼵⼶⼷⼸⼹⺕⺔⼺⼻⺾⻌⻖⺍⺖⺘⺡⺨⼼⺗⼽⼾⼿⽀⽁⺙⽂⽃⽄⽅⽆⽇⽈⽉⺝⽊⽋⽌⽍⽎⽏⽐⽑⽒⽓⽔⽕⺣⽖⺤爫⽗⽘⽙⽚⽜⽝⺭㓁⺹⽞⽟⽡⽢⽣⽤⽥⽦⺪⽧⽨⽩⽪⽫⽬⽭⽮⽯⽰⽱⽲⽳⽴氺⺫𦉰⻂⺛⽵⺮⽶⽷⽸⽹⽺⺷羽⽻⽼⽽⽾⽿⾀⾁⾂⾃⾄⾅⾆⾇⾈⾉⾊⾋⾌⾍⾎⾏⾐⾑⻃⽠⾒⾓⾔⾕⾖⾗⾘⾙⾚⾛⾜⻊⾝⾞⾟⾠⾡⾢⾣⾤⾥⾂⻨⾦⻑⾨⾩⾪⾫⾬⻗⾭⻘⾮⻟⻫⾯⾰⾲⾳⾴⾵⾶⾷⾸⾹⾺⾻⾼⾽⾾⾿⿀⿁⾱⿂⿃⿄⿅⿆⿇⻩黒⻲⿈⿉⿊⿋⻭⿌⿍⿎⿏⿐⿑⿒⿓⿔⿕".split(
+      ""
+    );
+  // if (v < 50) return "|";
+  // if (v < 100) return "-";
+  if (Math.random() >= emptySpaces) return "";
+  if (Math.random() <= 0.01) return random.pick(kanjis);
+  return random.pick(katakanas);
+  // if (Math.random() >= 0.1) return "-";
   // if (Math.random() >= 0.005) return random.pick(symbols);
   // if (Math.random() >= 0.5) return "-";
   // if (v < 210) return "=";
-  return random.pick(glyphs);
 };
 
 // document.addEventListener('keyup', onKeyUp);
@@ -105,14 +149,15 @@ const loadMeSomeImage = (url) => {
 };
 
 const start = async () => {
-  const url = "neon-avatar-abstract-500.jpg";
-  // const url = "avatar3.jpg";
+  // const url = "neon-avatar-abstract-500.jpg";
+  const url = "avatar3.jpg";
+  // const url = ("https://picsum.photos/200");
   image = await loadMeSomeImage(url);
   manager = await canvasSketch(sketch, settings);
 };
 
 start();
-
+// ⼀⼁⼂⼃⼄⺃⼅⼆⼇⼈⺅𠆢⼉⼊⼋⼌⼍⼎⼏⺇⼐⼑⺉⼒⼓⼔⼕⼖⼗⼘⼙⼚⼛⼜⼠⼡⼢⼣⼤⼥⼦⼧⼨⼩⺌⺐⼫⼬⼭⼮川⼯⼰⼱⼲⺓⼴⼵⼶⼷⼸⼹⺕⺔⼺⼻⺾⻌⻖⺍⺖⺘⺡⺨⼼⺗⼽⼾⼿⽀⽁⺙⽂⽃⽄⽅⽆⽇⽈⽉⺝⽊⽋⽌⽍⽎⽏⽐⽑⽒⽓⽔⽕⺣⽖⺤爫⽗⽘⽙⽚⽜⽝⺭㓁⺹⽞⽟⽡⽢⽣⽤⽥⽦⺪⽧⽨⽩⽪⽫⽬⽭⽮⽯⽰⽱⽲⽳⽴氺⺫𦉰⻂⺛⽵⺮⽶⽷⽸⽹⽺⺷羽⽻⽼⽽⽾⽿⾀⾁⾂⾃⾄⾅⾆⾇⾈⾉⾊⾋⾌⾍⾎⾏⾐⾑⻃⽠⾒⾓⾔⾕⾖⾗⾘⾙⾚⾛⾜⻊⾝⾞⾟⾠⾡⾢⾣⾤⾥⾂⻨⾦⻑⾨⾩⾪⾫⾬⻗⾭⻘⾮⻟⻫⾯⾰⾲⾳⾴⾵⾶⾷⾸⾹⾺⾻⾼⾽⾾⾿⿀⿁⾱⿂⿃⿄⿅⿆⿇⻩黒⻲⿈⿉⿊⿋⻭⿌⿍⿎⿏⿐⿑⿒⿓⿔⿕
 // アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン
 // const canvasSketch = require("canvas-sketch");
 // const random = require("canvas-sketch-util/random");
@@ -238,9 +283,9 @@ start();
 //     }
 //   // if (v < 255) return "points";
 
-//   const glyphs = "_=/|˜.DTIdt i".split("");
+//   const katakanas = "_=/|˜.DTIdt i".split("");
 
-//   return random.pick(glyphs);
+//   return random.pick(katakanas);
 // };
 
 // const onKeyUp = (e) => {
