@@ -2,7 +2,7 @@ const canvasSketch = require("canvas-sketch");
 const random = require("canvas-sketch-util/random");
 
 const settings = {
-  dimensions: [1080 * 5, 1080 * 5],
+  dimensions: [900 * 9, 734 * 9],
 };
 
 let debugCase1 = 0;
@@ -12,14 +12,17 @@ let debugCase3 = 0;
 let manager, image;
 
 let emptySpaces = 0.01;
-let fontSize = 2;
+const sizeOfCells = 10 / 4; //Quanto maior menos caracteres
+const blur = 150 * 2;
+const minimumBlack = 15;
+let fontSize = 2.5;
 let fontFamily = "monospace";
 
 const typeCanvas = document.createElement("canvas");
 const typeContext = typeCanvas.getContext("2d");
 
 const sketch = ({ context, width, height }) => {
-  const cell = 100 / 8;
+  const cell = 25 * sizeOfCells;
   const cols = Math.floor(width / cell);
   const rows = Math.floor(height / cell);
   const numCells = cols * rows;
@@ -65,33 +68,36 @@ const sketch = ({ context, width, height }) => {
       switch (true) {
         case randomChances <= 0.01:
           context.font = `${
-            calculatedFontSize * random.range(4, 8)
+            calculatedFontSize * random.range(3, 6)
           }px ${fontFamily}`;
-          context.fillStyle = `rgba(${r + 20}, ${g + 20}, ${b + 20}, ${
-            value / 255
-          })`;
-          context.filter = `blur(${random.range(0, 50)}px)`;
+          context.fillStyle = `rgba(${r + minimumBlack}, ${g + minimumBlack}, ${
+            b + minimumBlack
+          }, ${value / 255})`;
+          context.filter = `blur(${random.range(0, blur)}px)`;
           debugCase1++;
+          console.log("🟩 if 0.01: " + debugCase1);
           break;
         case randomChances <= 0.1:
           context.font = `${
-            calculatedFontSize * random.range(1, 4)
+            calculatedFontSize * random.range(1, 2)
           }px ${fontFamily}`;
-          context.fillStyle = `rgba(${r + 20}, ${g + 20}, ${b + 20}, ${
-            value / (255 / 2)
-          })`;
-          context.filter = `blur(${random.range(0, 5)}px)`;
+          context.fillStyle = `rgba(${r + minimumBlack}, ${g + minimumBlack}, ${
+            b + minimumBlack
+          }, ${value / (255 / 2)})`;
+          context.filter = `blur(${random.range(0, blur / 10)}px)`;
           debugCase2++;
+          console.log("🟨 if 0.1: " + debugCase2);
           break;
         default:
           context.font = `${
             calculatedFontSize / random.range(1, 4)
           }px ${fontFamily}`;
-          context.fillStyle = `rgba(${r + 100}, ${g + 100}, ${b + 100}, ${
-            value / (255 / 4)
-          })`;
-          context.filter = `blur(${random.range(0, 5)}px)`;
+          context.fillStyle = `rgba(${r + minimumBlack}, ${g + minimumBlack}, ${
+            b + minimumBlack
+          }, ${value / (255 / 4)})`;
+          context.filter = `blur(${random.range(0, blur / (blur / 2))}px)`;
           debugCase3++;
+          console.log("🟥 else: " + debugCase3);
       }
       context.save();
       context.translate(x, y);
@@ -103,9 +109,9 @@ const sketch = ({ context, width, height }) => {
 
       context.restore();
     }
-    console.log("🟩 if 0.01: " + debugCase1);
-    console.log("🟨 if 0.1: " + debugCase2);
-    console.log("🟥 else: " + debugCase3);
+    // console.log("🟩 if 0.01: " + debugCase1);
+    // console.log("🟨 if 0.1: " + debugCase2);
+    // console.log("🟥 else: " + debugCase3);
     // context.drawImage(typeCanvas, 0, 0);
   };
 };
@@ -123,7 +129,7 @@ const getGlyph = (v) => {
   // console.log(kanjis);
   // if (v < 50) return "|";
   // if (v < 100) return "-";
-  if (Math.random() >= emptySpaces) return "";
+  // if (Math.random() >= emptySpaces) return "";
   if (Math.random() <= 0.1) return random.pick(kanjis);
   return random.pick(katakanas);
   // if (Math.random() >= 0.1) return "-";
@@ -144,8 +150,8 @@ const loadMeSomeImage = (url) => {
 };
 
 const start = async () => {
+  // const url = "avatar3.jpg"; //avatar neon
   const url = "et.jpeg";
-  // const url = "bruno.jpeg";
   // const url = ("https://picsum.photos/200");
   image = await loadMeSomeImage(url);
   manager = await canvasSketch(sketch, settings);
