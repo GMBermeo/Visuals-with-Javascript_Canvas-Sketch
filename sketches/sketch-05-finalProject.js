@@ -2,7 +2,7 @@ const canvasSketch = require("canvas-sketch");
 const random = require("canvas-sketch-util/random");
 
 const settings = {
-  dimensions: [1720 * 5, 2000 * 5], //1720x2000
+  dimensions: [1072 * 6, 1338 * 6], //1072x1338
 };
 
 let debugCase1 = 0;
@@ -12,10 +12,10 @@ let debugCase3 = 0;
 let manager, image;
 
 let emptySpaces = 0.01;
-const sizeOfCells = 12.5 / 2; //Quanto maior menos caracteres
+const sizeOfCells = 12.5 / 4; //Quanto maior menos caracteres
 const blur = 150;
 const minimumBlack = 0;
-let fontSize = 2;
+let fontSize = 1.4;
 let fontFamily = "monospace";
 
 const typeCanvas = document.createElement("canvas");
@@ -155,8 +155,8 @@ const start = async () => {
   // const url = "starry.jpg"; // 2728x2160
   // const url = "sunflowers.jpeg"; // 2289x3071
   // const url = "kiss.jpeg"; // 7376x7401
-  const url = "abaporu.jpg"; // 1720x2000
-  // const url = "dali1.jpeg"; // 1072x1338
+  // const url = "abaporu.jpg"; // 1720x2000
+  const url = "dali1.jpeg"; // 1072x1338
   // const url = "dali2.jpeg"; // 1400x1064
   // const url = "scream.jpeg"; // 1518x1919
   // const url = "pearl.jpeg"; // 1861x2663
