@@ -1,40 +1,46 @@
 # Domestika: Creative Coding (bruno.imbrizi)
-<p align="center">
-  <img src="/finalProject%20Renders/Frame1.jpg" width="100%" />
-</p>
-<p align="center">
-  <img src="/finalProject%20Renders/Frame2.jpg" width="100%" />
-</p>
-<p align="center">
-  <img src="/finalProject%20Renders/Frame3.jpg" width="100%" />
-</p>
-<p align="center">
-  <img src="/finalProject%20Renders/Frame4.jpg" width="100%" />
-</p>
-<p align="center">
-  <img src="/finalProject%20Renders/Frame4.jpg" width="100%" />
-</p>
-<p align="center">
-  <img src="/finalProject%20Renders/Frame5.jpg" width="100%" />
-</p>
-<p align="center">
-  <img src="/finalProject%20Renders/Frame6.jpg" width="100%" />
-</p>
-<p align="center">
-  <img src="/finalProject%20Renders/Frame7.jpg" width="100%" />
-</p>
 
+| Unit 2 | Unit 3 | Unit 4 | Unit 5 | Unit 6 |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [Fundamentals](#unit-2---fundamentals) | [Sketch Transform](#unit-3---sketch-transform) | [Sketch Agents](#unit-4---sketch-agents) | [Sketch Noise](#unit-5---sketch-noise) | [Sketch Type](#unit-6---sketch-type) |
 
-| Primeiro cabeçalho  |  Segundo cabeçalho  | Terceiro Cabeçalho |
-| ------------------- | ------------------- | ------------------ |
-|  Célula de conteúdo |  Célula de conteúdo | Célula de conteúdo |
-|  Célula de conteúdo |  Célula de conteúdo | Célula de conteúdo |
+[Canvas-Sketch Documentation](#canvas-sketch)
+
+- [Quick Start](#quick-start)
+- [Canvas-Sketch Example](#code-example)
+
+## Unit 2 - Fundamentals
+
+![Blocks in black](finalProjectRenders/low/unit2Fundamentals1.jpg)
+![Blocks in neumorphism style](finalProjectRenders/low/unit2Fundamentals2.png)
+
+## Unit 3 - Sketch Transform
+
+![Randomized circles in different styles](finalProjectRenders/low/unit3SketchTransform1.jpg)
+![Circles in neumorphism style](finalProjectRenders/low/unit3SketchTransform2.jpg)
+
+## Unit 4 - Sketch Agents
+
+![Randomized dots connected by rules](finalProjectRenders/low/unit4SketchAgents1.jpg)
+![Randomized dots connected by rules in different styles](finalProjectRenders/low/unit4SketchAgents2.png)
+
+## Unit 5 - Sketch Noise
+
+![Dashes following random wave](finalProjectRenders/low/unit5SketchNoise.jpg)
+
+## Unit 6 - Sketch Type
+
+| ![Abaporu by Tarsila do Amaral](finalProjectRenders/low/unit6SketchTypeAvatarAbaporuTarsilaDoAmaral.jpg) | ![Meisje Met de Parel by Johannes Vermeer](finalProjectRenders/low/unit6SketchTypeMeisjeMetDeParelJohannesVermeer.jpg) |
+| ------------- | ------------- |
 
 [Course of Creative Coding with Javascript by Bruno Imbrizi on Domestika.](https://www.domestika.org/pt/courses/2729-programacao-criativa-produza-pecas-visuais-com-javascript)
+<p align="center">
+  <img src="finalProjectRenders/low/unit6SketchTypeAvatar.jpg" width="31%" align="left"/><img src="finalProjectRenders/low/unit6SketchTypeLinkedin.jpg" width="31%" align="center"/><img src="finalProjectRenders/low/unit6SketchTypeOldAvatar.jpg" width="31%" align="right"/>
+</p>
 
+----
 
-
-### canvas-sketch
+# canvas-sketch
 
 `canvas-sketch` is a loose collection of tools, modules and resources for creating generative art in JavaScript and the browser.
 
@@ -51,14 +57,14 @@
 </p>
 
 <p align="center">
-  <sub>↓</sub> 
+  <sub>↓</sub>
 </p>
 
 <p align="center">
-  <img src="https://github.com/mattdesl/canvas-sketch/blob/master/docs/assets/images/chrome-example.png" width="50%" />
+  <img src="https://github.com/mattdesl/canvas-sketch/raw/master/docs/assets/images/chrome-example.png" width="50%" />
 </p>
 
-### Quick Start with Node.js & npm
+### Quick Start
 
 To jump directly into `canvas-sketch`, try the following terminal commands with `node@8.x` and `npm@5.x` or newer.
 
