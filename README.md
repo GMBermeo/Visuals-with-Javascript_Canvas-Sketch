@@ -33,12 +33,10 @@
 | ![Abaporu by Tarsila do Amaral](finalProjectRenders/low/unit6SketchTypeAvatarAbaporuTarsilaDoAmaral.jpg) | ![Meisje Met de Parel by Johannes Vermeer](finalProjectRenders/low/unit6SketchTypeMeisjeMetDeParelJohannesVermeer.jpg) |
 | ------------- | ------------- |
 
-[Course of Creative Coding with Javascript by Bruno Imbrizi on Domestika.](https://www.domestika.org/pt/courses/2729-programacao-criativa-produza-pecas-visuais-com-javascript)
-<p align="center">
-  <img src="finalProjectRenders/low/unit6SketchTypeAvatar.jpg" width="31%" align="left"/><img src="finalProjectRenders/low/unit6SketchTypeLinkedin.jpg" width="31%" align="center"/><img src="finalProjectRenders/low/unit6SketchTypeOldAvatar.jpg" width="31%" align="right"/>
-</p>
+| ![Avatar from Github](finalProjectRenders/low/unit6SketchTypeAvatar.jpg) | ![Avatar from Linkedin](finalProjectRenders/low/unit6SketchTypeLinkedin.jpg) | ![Old avatar](finalProjectRenders/low/unit6SketchTypeOldAvatar.jpg) |
+| ------------- | ------------- | ------------- |
 
-----
+[Course of Creative Coding with Javascript by Bruno Imbrizi on Domestika.](https://www.domestika.org/pt/courses/2729-programacao-criativa-produza-pecas-visuais-com-javascript)
 
 # canvas-sketch
 
