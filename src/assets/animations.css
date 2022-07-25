@@ -1,0 +1,37 @@
+.slideLeft {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: animateLeft 0.8s forwards;
+}
+
+.slideDown {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: animateLeft 0.8s forwards;
+}
+
+.slideUpSlow {
+  opacity: 0;
+  transform: translateY(42px);
+  animation: animateLeft 0.8s forwards;
+}
+
+.zoomIn {
+  opacity: 0;
+  transform: scale(0.8);
+  animation: zoomIn 0.8s forwards;
+}
+
+@keyframes animateLeft {
+  to {
+    opacity: 1;
+    transform: initial;
+  }
+}
+
+@keyframes zoomIn {
+  to {
+    opacity: 1;
+    transform: initial;
+  }
+}
